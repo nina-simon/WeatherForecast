@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+</head>
+<body>
+    <h1>Weather App</h1>
+
+    <!-- Display Current Weather Data -->
+    <h2>Current Weather</h2>
+    <p>Temperature: {{ weather_info.current_temperature }}°C</p>
+    <p>Description: {{ weather_info.current_description }}</p>
+    <p>Wind Speed: {{ weather_info.current_wind_speed }}m/s</p>
+    <p>Current Humidity: {{ weather_info.current_humidity }}%</p>
+
+    <!-- Weather Forecast Section -->
+    <div id="forecast-data">
+        <table class="forecast-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Temperature (°C)</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for day in weather_info.forecast_days %}
+                    <tr>
+                        <td>{{ day.date }}</td>
+                        <td>{{ day.temperature }}°C</td>
+                        <td>{{ day.description }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='forecast_chart.js') }}"></script>
+</body>
+</html>
